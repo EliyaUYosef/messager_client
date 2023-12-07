@@ -8,7 +8,20 @@ export function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export function formatDate(inputDate) {
+export function formatTime(inputDate) {
+  const date = new Date(inputDate);
+
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  // Add leading zero if needed
+  const formattedHours = hours < 10 ? `0${hours}` : hours;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  return `${formattedHours}:${formattedMinutes}`;
+}
+
+export function formatDateAndTime(inputDate) {
   const date = new Date(inputDate);
 
   const day = date.getDate();
@@ -25,9 +38,8 @@ export function formatDate(inputDate) {
   return `${formattedDay??'0'}/${formattedMonth??'0'} ${formattedHours??'00'}:${formattedMinutes??'00'}`;
 }
 
-const getUserProfile = async (token) => {
+export async function getUserProfile(token) {
   try {
-      console.log("REQUEST", formData);
       const response = await fetch(
         `https://messager-api-c2cd41880be6.herokuapp.com/api/auth/profile`,
         {

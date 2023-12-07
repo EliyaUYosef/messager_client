@@ -5,7 +5,7 @@ import Link from "next/link";
 import Style from "@/app/page.module.css";
 import ChatHeader from "../chat_header/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp, faCaretDown, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Chat = () => {
       const { globalData, currentFriend, authToken } = useContext(AppContext);
@@ -37,7 +37,7 @@ const Chat = () => {
       }
       console.log(globalData);
     };
-
+    
     // fetchData();
     // Set up an interval to fetch data every 1.5-2 seconds
     const intervalId = setInterval(() => {
@@ -76,8 +76,22 @@ const Chat = () => {
                 : Style.secondary_user_message
             }`}
           >
+            { message.recieved_flag === 0 && message.sender === user.id &&
+
+            <div style={{color:"#399e78", backgroundColor:'#f0f0f0',borderRadius:'6px',textAlign:'center',marginBottom:'5px',padding:'3px'}}>
+                <FontAwesomeIcon icon={faEnvelope} 
+                    style={{
+                        fontSize:'20px',
+                        
+                        margin:"auto"
+                    }}
+                /> 
+                {" - "}New Message
+              </div>
+              }
             <span className={Style.message_subject}>{message.subject}</span>
             {message.message}
+            
             <div
               className={Style.message_time}
               style={{ textAlign: "right" }}

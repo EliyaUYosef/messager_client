@@ -16,6 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from 'next/navigation'
+import {getUserProfile} from "@/app/utils"
 
 export default function Login() {
     const router = useRouter();
@@ -48,33 +49,7 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const getUserProfile = async (token) => {
-    try {
-        console.log("REQUEST", formData);
-        const response = await fetch(
-          `https://messager-api-c2cd41880be6.herokuapp.com/api/auth/profile`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: "application/json",
-              Authorization: authToken
-            }
-          }
-        );
   
-        const data = await response.json();
-        if (data.message === "User profile data.") {
-            console.log("RESPONSE", data);
-          setGlobalData({...globalData, user : data.data})
-          router.push('/');
-          return "0";
-        }
-        return "0";
-      } catch (error) {
-        console.error("Error during login:", error);
-        return "0";
-      }
-  }
   const loginUser = async (formData) => {
     try {
       console.log("REQUEST", formData);

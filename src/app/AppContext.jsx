@@ -7,7 +7,7 @@ const AppProvider = ({ children }) => {
   const [globalData, setGlobalData] = useState({user:{}});
   const [authToken, setAuthToken ] = useState('');
   const [chatWith, setChatWith ] = useState({});
-  const [currentFriend, setCurrentFriend ] = useState(5);
+  const [currentFriend, setCurrentFriend ] = useState(0);
 
   return (
     <AppContext.Provider value={{ globalData, setGlobalData,authToken, setAuthToken,chatWith, setChatWith,currentFriend, setCurrentFriend }}>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Style from "@/app/page.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { capitalizeFirstLetter, formatDate } from '@/app/utils';
+import { capitalizeFirstLetter, formatDateAndTime } from '@/app/utils';
 const ChatHeader = (params) => {
   return (
     <div>
@@ -18,7 +18,7 @@ const ChatHeader = (params) => {
           marginTop: "5px",
         }}
       >
-        {formatDate(params.params.last_action_time)}
+        {formatDateAndTime(params.params.last_action_time)}
       </span>
       <span
         style={{

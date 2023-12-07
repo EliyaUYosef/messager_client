@@ -12,6 +12,10 @@ export default function SendMessage() {
     const [message, setMessage] = useState({
         subject: '', message: '',reciver:0
     });
+    const [errorField, setErrorField] = useState({
+        subject: false, 
+        message: false
+    });
     useEffect(()=>{
         setMessage({...message,reciver:currentFriend})
     },[currentFriend]);
@@ -30,24 +34,43 @@ export default function SendMessage() {
               body: JSON.stringify(formData),
             }
           );
-    
+          
           const data = await response.json();
+          console.log("ERROR",data)
           if (data.message === "Message created.") {
               console.log("RESPONSE", data);
               setMessage({subject:'',message:''})
           }
+          else if (data.errors) {
+            if (data.errors.subject?.length > 0){
+                setErrorField({...errorField,subject:true});
+            }
+            if (data.errors.message?.length > 0) {
+                setErrorField({...errorField,message:true});
+            }
+          }
           return "0";
         } catch (error) {
-          console.error("Error during login:", error);
-          return "0";
+            console.log("ERROR",error)
+        //   console.error("Error during login:", error);
         }
       };
     const handleSubmit = () => {
+        if (message.subject === '') {
+            setErrorField({...errorField,subject:true});
+            return;
+        }
+        if (message.message === '') {
+            setErrorField({...errorField,message:true});
+            return;
+        }
         sendMessage(message);
     }
     const handleInputChange = (e) => {
         const { value, name} = e.target;
         setMessage({...message,[name]:value});
+        if (value.length > 0)
+            setErrorField({...errorField,[name]:false});
     };
   return (
     <div className={styles.send_message_form}>
@@ -58,18 +81,22 @@ export default function SendMessage() {
                 name='subject' 
                 value={message.subject}
                 sx={{ mt: 0, p: 1, width: '100%' }} 
-                variant='filled' 
+                variant='outlined' 
+                color="success"
                 onChange={handleInputChange} 
+                error={errorField.subject}
             />
             <TextField 
+                color="success"
                 label="Message"
                 autoFocus 
                 value={message.message}
                 size='small' 
                 sx={{ m: 0, p: 1, width: '100%' }} 
                 name='message' 
-                variant='filled' 
+                variant='outlined' 
                 onChange={handleInputChange} 
+                error={errorField.message}
             />
             <br/>
             <Button sx={{background:"#04AA6D"}} type='submit' name='submit' variant='contained'

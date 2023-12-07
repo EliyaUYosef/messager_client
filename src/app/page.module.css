@@ -45,11 +45,11 @@
 
 /* Chat */
 .chat {
-  width: calc(100% - 300px); /* Adjust the width as needed */
-  height: 100vh; /* Set the height to cover the full viewport height */
-  padding: 0; /* Add padding for content */
-  position: fixed; /* Fixed position to stay on the screen while scrolling */
-  left: 0; /* Align to the left side */
+  width: calc(100% - 300px);
+  height: 100vh;
+  padding: 0;
+  position: fixed;
+  left: 0;
   top: 50px;
   display: flex;
   flex-direction: column;
@@ -65,6 +65,7 @@
   background-color: #f0f0f0;
   position: fixed;
   width: calc(100% - 302px);
+  border-bottom:#04AA6D 1px solid;
   z-index:2;
 }
 
@@ -127,13 +128,18 @@
   border-bottom: 1px solid #ccc;
   /* color: #f0f0f0; */
 }
+.chosen_one {
+  color: #212121;
+  border-bottom: solid 1px #dddd;
+  background-color: #04aa6d7a;
+}
 .conversations ul{ 
   list-style: none;
   width: 100%;
   color : #212121;
   padding: 0;
   /* border: orange 1px solid; */
-  
+  overflow-y: scroll;
 }
 .conversations li{ 
   width: 100%;
@@ -144,7 +150,7 @@
 }
 .user_list_item {
   width: 100%;
-  height: calc(100%/4);
+  height: 75px;
   transition: linear .2s;
 }
 .user_list_item:hover {
