@@ -1,11 +1,10 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "@/app/AppContext";
-import Link from "next/link";
 import Style from "@/app/page.module.css";
 import ChatHeader from "../chat_header/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretUp, faCaretDown, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp, faCaretDown, faEnvelope, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const Chat = () => {
       const { globalData, currentFriend, authToken } = useContext(AppContext);
@@ -16,7 +15,7 @@ const Chat = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://messager-api-c2cd41880be6.herokuapp.com/api/msg/get_chat_with",
+          "https://messager-api-c2cd41880be6.herokuapp.com/api/msg/get_chat_with_first",
           {
             method: "POST",
             headers: {
@@ -30,7 +29,7 @@ const Chat = () => {
         );
         const data = await response.json();
         console.log(data);
-        setMessages(data.data.messages.data); // assuming the API response is an array of people
+        setMessages(data.data.messages); // assuming the API response is an array of people
         setUser(data.data.chat_with);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,7 +40,7 @@ const Chat = () => {
     // fetchData();
     // Set up an interval to fetch data every 1.5-2 seconds
     const intervalId = setInterval(() => {
-        if (currentFriend > 0) {
+        if (currentFriend > 0 && messages.length === 0) {
             fetchData();
         }
     }, 2500);
@@ -49,19 +48,17 @@ const Chat = () => {
     // Clean up the interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, [currentFriend]); // Empty dependency array to run the effect only once when the component mounts
-
   return (
     <div
       className={`${Style.chat}`}
-      style={{ border: "solid 1px #04AA6D" }}
     >
       <ul>
-        <li
+        {currentFriend && <li
           className={`${Style.chat_header}`}
           style={{ fontWeight: "600" }}
         >
           <ChatHeader params={user} />
-        </li>
+        </li>}
         <br />
         <br />
         <br />
@@ -78,24 +75,21 @@ const Chat = () => {
           >
             { message.recieved_flag === 0 && message.sender === user.id &&
 
-            <div style={{color:"#399e78", backgroundColor:'#f0f0f0',borderRadius:'6px',textAlign:'center',marginBottom:'5px',padding:'3px'}}>
+            <div className={`${Style.un_read_message_indication}`}>
                 <FontAwesomeIcon icon={faEnvelope} 
                     style={{
                         fontSize:'20px',
-                        
                         margin:"auto"
                     }}
                 /> 
                 {" - "}New Message
+                    
               </div>
               }
             <span className={Style.message_subject}>{message.subject}</span>
             {message.message}
             
-            <div
-              className={Style.message_time}
-              style={{ textAlign: "right" }}
-            >
+            <div className={Style.message_time}>
               {formatDate(message.created_at)}{" "}
               <FontAwesomeIcon
                 icon={message.sender !== user.id ? faCaretDown : faCaretUp}

@@ -1,9 +1,7 @@
 "use client";
 import React,{useState,useContext,useEffect} from 'react';
 import styles from '@/app/page.module.css';
-import Box from '@mui/joy/Box';
 import { Button, TextField } from '@mui/material';
-import Divider from '@mui/material/Divider';
 import { AppContext } from "@/app/AppContext";
 
 export default function SendMessage() {
@@ -72,7 +70,7 @@ export default function SendMessage() {
         if (value.length > 0)
             setErrorField({...errorField,[name]:false});
     };
-  return (
+  return (currentFriend &&
     <div className={styles.send_message_form}>
             <TextField 
                 label="Subject"
@@ -101,7 +99,7 @@ export default function SendMessage() {
             <br/>
             <Button sx={{background:"#04AA6D"}} type='submit' name='submit' variant='contained'
                 onClick={handleSubmit}>
-            Send
+                Send
             </Button>
     </div>
   )

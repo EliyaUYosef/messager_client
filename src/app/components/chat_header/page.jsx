@@ -1,9 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Style from "@/app/page.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 import { capitalizeFirstLetter, formatDateAndTime } from '@/app/utils';
 const ChatHeader = (params) => {
   return (

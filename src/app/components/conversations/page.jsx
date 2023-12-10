@@ -27,7 +27,7 @@ const changeChatUser = (id) => {
 
         setPeople(data.data.users);
           console.log(currentFriend,data.data.users[0].id)
-        if (currentFriend === 0) setCurrentFriend(data.data.users[0].id)
+        // if (currentFriend === 0) setCurrentFriend(data.data.users[0].id)
       } catch (error) {
         console.error("Error fetching data:", error);
       }

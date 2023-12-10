@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding:0;
   min-height: 100vh;
   
 }
@@ -57,12 +57,29 @@
   background-color: #fff;
   color: #212121;
   overflow-y: scroll ;
+  /* border: solid 1px #04AA6D; */
+}
+.chat {
+  background-image: url('../../public/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #f0f0f0;
+  background-position: center center;
+  background-attachment: fixed;
+}
+.un_read_message_indication {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 3px;
+  color: #399e78;
 }
 .chat_header {
   height: 90px;
   border-bottom: 1px solid #ddd;
   padding: 15px;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0e8;
   position: fixed;
   width: calc(100% - 302px);
   border-bottom:#04AA6D 1px solid;
@@ -70,38 +87,44 @@
 }
 
 .message {
-  margin: 10px 6px;
+  margin: 18px 6px;
   padding: 13px 8px;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.075);
-  border: 1px solid #eeee #04AA6D;
-  letter-spacing: .62px;
+  
+  letter-spacing: .57px;
 }
 .message_subject {
   font-weight: 600;
-  
+  margin-bottom: 5px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  border-bottom: #eeeeee67 1px solid;
 }
 .primary_user_message {
-  background-color: #04AA6D;
+  background-color: #04aa6df2;
   color: #fff; /* Set text color for your messages */
-  margin-left: 20%;
-  margin-right: 2%;
-  border-bottom-right-radius: 1px;
+  margin-left: 25%;
+  margin-right: 4%;
+  /* border: 1px solid #dddddde5; */
+  border-bottom-right-radius: 0px;
 }
 .secondary_user_message {
-  background-color: #ddd;
+  background-color: #ddddddf1;
   color: #212121; /* Set text color for other user's messages */
-  margin-right: 20%;
-  margin-left: 2%;
-  border-bottom-left-radius: 1px;
+  margin-right: 25%;
+  margin-left: 4%;
+  /* border: 1px solid #04aa6de2; */
+  border-bottom-left-radius: 0px;
 } 
 .message_time {
   margin-top: 8px;
   font-size: 87%;
   opacity: .9;
+  text-align: right;
 }
 
 
@@ -161,14 +184,15 @@
 
 /* Send Message */
 .send_message_form {
-
+  
   border:#04AA6D 1px solid;
   width: calc(100% - 300px);
   /* height: 178px; */
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: #efefef;
+  background-color: #efefefee;
+  /* background-color: transparent; */
   padding: 8px;
   text-align: center;
 }
